@@ -1,6 +1,6 @@
-GadiSewa 🚗
+# GadiSewa 🚗
 
-Easy rides , faster rides
+## Easy rides , faster rides
 
 
-#Build with MERN STACK
+- Build with MERN STACK
