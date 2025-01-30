@@ -148,3 +148,78 @@ The request body should be a JSON object containing the following fields:
 ### Notes:
 - Ensure that the email and password provided are correct.
 - The JWT token is used for authenticating subsequent requests.
+
+# User Profile Endpoint
+
+## Endpoint: `/users/profile`
+
+### Method: GET
+
+### Description:
+This endpoint is used to retrieve the profile of the authenticated user.
+
+### Headers:
+- `Authorization`: Bearer token obtained from the login endpoint.
+
+### Responses:
+
+#### Success (200 OK):
+- **Description**: User profile retrieved successfully.
+- **Body**: A JSON object containing the user details.
+```json
+{
+  "_id": "user_id_here",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+#### Unauthorized (401 Unauthorized):
+- **Description**: User is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+### Notes:
+- Ensure that the JWT token is valid and not expired.
+
+# User Logout Endpoint
+
+## Endpoint: `/users/logout`
+
+### Method: GET
+
+### Description:
+This endpoint is used to log out the authenticated user.
+
+### Headers:
+- `Authorization`: Bearer token obtained from the login endpoint.
+
+### Responses:
+
+#### Success (200 OK):
+- **Description**: User successfully logged out.
+- **Body**: A JSON object containing the success message.
+```json
+{
+  "message": "logged out"
+}
+```
+
+#### Unauthorized (401 Unauthorized):
+- **Description**: User is not authenticated.
+- **Body**: A JSON object containing the error message.
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+### Notes:
+- The JWT token is invalidated and added to the blacklist.
