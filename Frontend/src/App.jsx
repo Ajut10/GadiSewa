@@ -10,6 +10,7 @@ import CaptainSignup from './pages/CaptainSignup'
 const App = () => {
   return (
     <div>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UserLogin />} />
