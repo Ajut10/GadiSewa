@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/images/gadiBlack.jpg";
+import logo from "../assets/images/gadilogoblack.png";
 import { CaptainDataContext } from "../context/CaptainContext";
 import axios from "axios";
 
