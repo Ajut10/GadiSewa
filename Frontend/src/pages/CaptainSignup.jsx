@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/gadilogoblack.png";
 import { CaptainDataContext } from "../context/CaptainContext";
 import axios from "axios";
+import {toast} from "react-toastify";
+
 
 const CaptainSignup = () => {
   const [email, setEmail] = useState("");
@@ -18,39 +20,52 @@ const CaptainSignup = () => {
 
   const navigate = useNavigate();
   const { captain, setCaptain } = useContext(CaptainDataContext);
+  
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const captainData={
-      fullname: {
-        firstname: firstName,
-        lastname: lastName,
-      },
-      email: email,
-      password: password,
-      vehicle: {
-        color: vehicleColor,
-        plate: vehiclePlate,
-        capacity: vehicleCapacity,
-        vehicleType: vehicleType,
+    try{
+      const captainData={
+        fullname: {
+          firstname: firstName,
+          lastname: lastName,
+        },
+        email: email,
+        password: password,
+        vehicle: {
+          color: vehicleColor,
+          plate: vehiclePlate,
+          capacity: vehicleCapacity,
+          vehicleType: vehicleType,
+        }
+      };
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainData);
+      if (response.status === 201) {
+        const data = response.data;
+        setCaptain(data.captain);
+        localStorage.setItem("token", data.token);
+        toast.success("Captain Registered Successfully");
+        navigate("/captain-home");
       }
-    };
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainData);
-    if (response.status === 201) {
-      const data = response.data;
-      setCaptain(data.captain);
-      localStorage.setItem("token", data.token);
-      navigate("/captain-home");
+      
+  
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
+      setVehicleColor("");
+      setVehiclePlate("");
+      setVehicleCapacity("");
+      setVehicleType("");
+    }catch(error){
+      if(error.response){
+        toast.error(error.response.data.error || "Captain Registration Failed");
+      }
+      else{
+        toast.error("Something went wrong. Try again!");
+      }
     }
-
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-    setVehicleColor("");
-    setVehiclePlate("");
-    setVehicleCapacity("");
-    setVehicleType("");
+    
 
   };
   return (

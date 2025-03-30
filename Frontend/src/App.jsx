@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import UserProtectWrapper from "./context/UserProtectWrapper";
 import UserLogout from "./pages/UserLogout";
 import CaptainHome from "./pages/CaptainHome";
+import 'react-toastify/dist/ReactToastify.css';
+
 import CaptainProtectWrapper from "./context/CaptainProtectWrapper";
 
 const App = () => {

@@ -4,6 +4,9 @@ import logo from "../assets/images/gadiBlack.jpg";
 import "remixicon/fonts/remixicon.css";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+// import toast from "react-hot-toast";
+import { toast } from "react-toastify"
+
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -11,6 +14,7 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
+
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -20,6 +24,7 @@ const Home = () => {
       if (panelOpen) {
         gsap.to(panelRef.current, { height: "70%" });
         gsap.to(panelCloseRef.current, { opacity: 1 });
+        
       } else {
         gsap.to(panelRef.current, { height: "0%" });
         gsap.to(panelCloseRef.current, { opacity: 0 });
@@ -42,7 +47,7 @@ const Home = () => {
             }}
             ref={panelCloseRef}
           >
-            <i className="ri-arrow-up-wide-line"></i>
+            <i className="ri-arrow-down-wide-line"></i>
           </h5>
 
           <h4 className="text-2xl font-semibold">Find your trip</h4>

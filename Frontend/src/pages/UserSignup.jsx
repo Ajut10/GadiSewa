@@ -3,6 +3,7 @@ import logo from "../assets/images/gadiBlack.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {UserDataContext} from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const UserSignup = () => {
   const [email, setEmail] = useState("");
@@ -16,27 +17,38 @@ const UserSignup = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const newUser = {
-      fullname: {
-        firstname: firstName,
-        lastname: lastName,
-      },
-      email: email,
-      password: password,
-    };
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/users/register`,
-      newUser
-    );
-    if (response.status === 201) {
-      const data = response.data;
-      setUser(data.user);
-      localStorage.setItem("token", data.token);
-      navigate("/login");
-    }
+    try{
 
-    setEmail("");
-    setPassword("");
+      const newUser = {
+        fullname: {
+          firstname: firstName,
+          lastname: lastName,
+        },
+        email: email,
+        password: password,
+      };
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/users/register`,
+        newUser
+      );
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        toast.success("User Registered Successfully");
+        navigate("/login");
+      }
+  
+      setEmail("");
+      setPassword("");
+    }catch(error){
+      if(error.response){
+        toast.error(error.response.data.error || "Invalid Email or Password");
+      }else{
+        toast.error("Something went wrong. Try again!");
+      }
+
+    }
   };
   return (
     <div className="p-7 flex flex-col justify-between h-screen">

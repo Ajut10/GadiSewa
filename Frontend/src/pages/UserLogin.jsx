@@ -3,6 +3,8 @@ import logo from "../assets/images/gadiBlack.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 import axios from "axios";
+// import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -13,23 +15,34 @@ const UserLogin = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const userData = {
-      email: email,
-      password: password,
-    };
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/users/login`,
-      userData
-    );
-    if (response.status == 200) {
-      const data = response.data;
-      setUser(data.user);
-      localStorage.setItem("token", data.token);
-      navigate("/home");
-    }
+    try{
+      
+      const userData = {
+        email: email,
+        password: password,
+      };
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/users/login`,
+        userData
+      );
+      if (response.status == 200) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        toast.success("Login successful!");
+        navigate("/home");
+      }
+  
+      setEmail("");
+      setPassword("");
+    }catch (error) {
+     if(error.response.data){
+      toast.error(error.response.data.error || "Invalid Email or Password");
 
-    setEmail("");
-    setPassword("");
+    }else{
+      toast.error("Something went wrong. Try again!");
+     }
+    }
   };
   return (
     <div className="p-7 flex flex-col justify-between h-screen">
