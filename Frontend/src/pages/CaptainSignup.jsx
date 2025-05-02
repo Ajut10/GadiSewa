@@ -45,18 +45,18 @@ const CaptainSignup = () => {
         setCaptain(data.captain);
         localStorage.setItem("token", data.token);
         toast.success("Captain Registered Successfully");
-        navigate("/captain-home");
+        navigate("/captain-login");
+        setEmail("");
+        setPassword("");
+        setFirstName("");
+        setLastName("");
+        setVehicleColor("");
+        setVehiclePlate("");
+        setVehicleCapacity("");
+        setVehicleType("");
       }
       
   
-      setEmail("");
-      setPassword("");
-      setFirstName("");
-      setLastName("");
-      setVehicleColor("");
-      setVehiclePlate("");
-      setVehicleCapacity("");
-      setVehicleType("");
     }catch(error){
       if(error.response){
         toast.error(error.response.data.error || "Captain Registration Failed");

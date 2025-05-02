@@ -19,8 +19,8 @@ const WaitingForDriver = (props) => {
           alt=""
         />
         <div className="text-right">
-          <h2 className="text-lg font-medium">Sarthak</h2>
-          <h4 className="text-xl font-semibold -mt-1 -mb-1">MP04 AB 1234</h4>
+          <h2 className="text-lg font-medium">Babu</h2>
+          <h4 className="text-xl font-semibold -mt-1 -mb-1">BA04 PA 1234</h4>
           <p className="text-sm text-gray-600">Maruti Suzuki Alto</p>
         </div>
       </div>
@@ -41,7 +41,7 @@ const WaitingForDriver = (props) => {
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab, Bhopal
+                Adhikhola, Kathmandu
               </p>
             </div>
           </div>
