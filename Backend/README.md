@@ -566,3 +566,215 @@ This endpoint is used to log out the authenticated captain.
 ### Notes:
 
 - The JWT token is invalidated and added to the blacklist.
+
+# Maps Endpoints
+
+## Get Address Coordinates
+
+### Endpoint: `/maps/get-coordinates`
+
+### Method: GET
+
+### Description:
+
+This endpoint retrieves the latitude and longitude of a given address.
+
+### Query Parameters:
+
+- `address` (string, required): The address to get coordinates for.
+
+### Example Request:
+
+```
+GET /maps/get-coordinates?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+```
+
+### Responses:
+
+#### Success (200 OK):
+
+- **Description**: Coordinates retrieved successfully.
+- **Body**:
+
+```json
+{
+  "lat": 37.4224764,
+  "lng": -122.0842499
+}
+```
+
+#### Client Error (400 Bad Request):
+
+- **Description**: Validation error or missing required fields.
+- **Body**:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid address",
+      "param": "address",
+      "location": "query"
+    }
+  ]
+}
+```
+
+#### Server Error (500 Internal Server Error):
+
+- **Description**: Failed to fetch coordinates.
+- **Body**:
+
+```json
+{
+  "message": "Failed to fetch coordinates"
+}
+```
+
+---
+
+## Get Distance and Time
+
+### Endpoint: `/maps/get-distance-time`
+
+### Method: GET
+
+### Description:
+
+This endpoint calculates the distance and estimated travel time between two locations.
+
+### Query Parameters:
+
+- `origin` (string, required): The starting location.
+- `destination` (string, required): The destination location.
+
+### Example Request:
+
+```
+GET /maps/get-distance-time?origin=New+York,+NY&destination=Los+Angeles,+CA
+```
+
+### Responses:
+
+#### Success (200 OK):
+
+- **Description**: Distance and time retrieved successfully.
+- **Body**:
+
+```json
+{
+  "distance": {
+    "text": "2,789 miles",
+    "value": 4488776
+  },
+  "duration": {
+    "text": "1 day 18 hours",
+    "value": 154800
+  }
+}
+```
+
+#### Client Error (400 Bad Request):
+
+- **Description**: Validation error or missing required fields.
+- **Body**:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid origin",
+      "param": "origin",
+      "location": "query"
+    },
+    {
+      "msg": "Invalid destination",
+      "param": "destination",
+      "location": "query"
+    }
+  ]
+}
+```
+
+#### Server Error (500 Internal Server Error):
+
+- **Description**: Failed to fetch distance and time.
+- **Body**:
+
+```json
+{
+  "message": "Failed to fetch distance and time"
+}
+```
+
+---
+
+## Get Autocomplete Suggestions
+
+### Endpoint: `/maps/get-autocomplete-suggestions`
+
+### Method: GET
+
+### Description:
+
+This endpoint provides autocomplete suggestions for a given input string.
+
+### Query Parameters:
+
+- `input` (string, required): The input string to get suggestions for.
+
+### Example Request:
+
+```
+GET /maps/get-autocomplete-suggestions?input=1600+Amphitheatre
+```
+
+### Responses:
+
+#### Success (200 OK):
+
+- **Description**: Suggestions retrieved successfully.
+- **Body**:
+
+```json
+[
+  {
+    "description": "1600 Amphitheatre Parkway, Mountain View, CA, USA",
+    "place_id": "ChIJ2eUgeAK6j4ARbn5u_wAGqWA"
+  },
+  {
+    "description": "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+    "place_id": "ChIJ2eUgeAK6j4ARbn5u_wAGqWA"
+  }
+]
+```
+
+#### Client Error (400 Bad Request):
+
+- **Description**: Validation error or missing required fields.
+- **Body**:
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid input",
+      "param": "input",
+      "location": "query"
+    }
+  ]
+}
+```
+
+#### Server Error (500 Internal Server Error):
+
+- **Description**: Failed to fetch autocomplete suggestions.
+- **Body**:
+
+```json
+{
+  "message": "Failed to fetch autocomplete suggestions"
+}
+```
+
+---
