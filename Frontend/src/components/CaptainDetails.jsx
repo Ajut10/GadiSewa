@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CaptainDataContext } from '../context/CaptainContext'
 import profileImg from "../assets/images/babu.jpg";
+
+const { captain } = useContext(CaptainDataContext)
 const CaptainDetails = () => {
   return (
     <div>
@@ -10,7 +13,7 @@ const CaptainDetails = () => {
             src={profileImg}
             alt=""
           />
-          <h4 className="text-lg font-medium">Babu Rao</h4>
+          <h4 className="text-lg font-medium">{captain.fullname.firstname + " " + captain.fullname.lastname}</h4>
         </div>
         <div>
           <h4 className="text-xl font-semibold">₹295.20</h4>

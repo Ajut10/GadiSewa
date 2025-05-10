@@ -26,7 +26,7 @@ const ConfirmedRide = (props) => {
             <i className="text-lg ri-map-pin-fill"></i>
             <div>
               <h3 className="text-lg font-medium">5563/A</h3>
-              <p className="text-sm text-gray-500">Location</p>
+              <p className="text-sm text-gray-500">{props.pickup}</p>
             </div>
           </div>
 
@@ -35,14 +35,14 @@ const ConfirmedRide = (props) => {
               <i className="text-lg ri-map-pin-2-fill"></i>
               <div>
                 <h3 className="text-lg font-medium">5563/A</h3>
-                <p className="text-sm text-gray-500">Location</p>
+                <p className="text-sm text-gray-500">{props.destination}</p>
               </div>
             </div>
           </div>
           <div className="flex gap-5 items-center justify-betweeen  p-3">
             <i className="text-lg ri-money-rupee-circle-line"></i>
             <div>
-              <h3 className="text-lg font-medium">Rs 300</h3>
+              <h3 className="text-lg font-medium">Rs {props.fare[props.vehicleType]}</h3>
               <p className="text-sm text-gray-500 -mt-1">Cash</p>
             </div>
           </div>
@@ -52,6 +52,7 @@ const ConfirmedRide = (props) => {
             onClick={() => {
               props.setConfirmedRidePanel(false);
               props.setVehicleFoundPanel(true);
+              props.createRide()
             }}
             className="bg-green-500 w-full px-5 py-3 font-semibold text-white text-lg rounded mt-4"
           >
