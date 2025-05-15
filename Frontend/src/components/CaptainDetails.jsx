@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { CaptainDataContext } from '../context/CaptainContext'
 import profileImg from "../assets/images/babu.jpg";
 
-const { captain } = useContext(CaptainDataContext)
 const CaptainDetails = () => {
+  const { captain } = useContext(CaptainDataContext)
   return (
     <div>
       <div className="flex items-center justify-between">

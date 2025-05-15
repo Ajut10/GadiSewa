@@ -6,7 +6,7 @@ const LookingForDriver = (props) => {
       <h5
         className="text-gray-300 flex items-center justify-center text-3xl"
         onClick={() => {
-          props.setConfirmedRidePanel(false);
+          // props.setConfirmedRidePanel(false);
           //   setPanelOpen(true);
         }}
       >
