@@ -15,6 +15,7 @@ import WaitingForDriver from "../components/WaitingForDriver";
 
 import { UserDataContext } from "../context/UserContext";
 import { SocketContext } from "../context/SocketContext";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -42,6 +43,8 @@ const Home = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
   const [ride, setRide] = useState(null);
+
+  const navigate = useNavigate();
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
   useEffect(() => {
@@ -53,6 +56,13 @@ const Home = () => {
         setWaitingForDriver(true)
         setRide(ride)
     })
+
+ socket.on('ride-started', ride => {
+        console.log("ride")
+        setWaitingForDriver(false)
+        navigate('/riding',{state:{ride}})
+    })
+
   const handlePickupChange = async (e) => {
     setPickup(e.target.value);
     try {
